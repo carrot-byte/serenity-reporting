@@ -6,11 +6,7 @@ import com.epam.reportportal.service.ReportPortal;
 import com.epam.ta.reportportal.ws.model.FinishExecutionRQ;
 import com.epam.ta.reportportal.ws.model.launch.StartLaunchRQ;
 import com.github.carrotbyte.factories.LaunchEventsFactory;
-import net.thucydides.model.domain.TestOutcome;
-import net.thucydides.model.reports.TestOutcomeLoader;
-import net.thucydides.model.reports.TestOutcomeStream;
 
-import java.nio.file.Path;
 import java.time.Instant;
 import java.util.Collections;
 import java.util.Date;
