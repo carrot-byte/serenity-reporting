@@ -10,5 +10,5 @@ public interface LaunchEventsFactory {
 
     FinishExecutionRQ buildFinishLaunch(Date endTime);
 
-    LaunchEventsFactory PARAMETERS_BASED_IMPLEMENTATION = new ParametersBasedLaunchEventsFactory();
+    LaunchEventsFactory DEFAULT_IMPLEMENTATION = new DefaultLaunchEventsFactory();
 }

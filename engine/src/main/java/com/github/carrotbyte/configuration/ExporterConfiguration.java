@@ -1,4 +1,4 @@
-package com.github.carrotbyte;
+package com.github.carrotbyte.configuration;
 
 import com.github.carrotbyte.factories.LaunchEventsFactory;
 import com.github.carrotbyte.factories.SuiteEventsFactory;
@@ -6,17 +6,31 @@ import com.github.carrotbyte.factories.SuiteEventsFactory;
 public class ExporterConfiguration {
 
     // TODO: Define all other configuration properties
+    private ProvidesListenerParameters providesListenerParameters;
+    private ProvidesTestOutcomes providesTestOutcomes;
     private LaunchEventsFactory launchEventsFactory;
     private SuiteEventsFactory suiteEventsFactory;
 
-    private ExporterConfiguration(LaunchEventsFactory launchEventsFactory, SuiteEventsFactory suiteEventsFactory) {
+    private ExporterConfiguration(
+            ProvidesListenerParameters provider,
+            ProvidesTestOutcomes providesTestOutcomes,
+            LaunchEventsFactory launchEventsFactory,
+            SuiteEventsFactory suiteEventsFactory
+    ) {
+        this.providesListenerParameters = provider;
+        this.providesTestOutcomes = providesTestOutcomes;
         this.launchEventsFactory = launchEventsFactory;
         this.suiteEventsFactory = suiteEventsFactory;
     }
 
-    public static ExporterConfiguration withDefaults() {
+    public static ExporterConfiguration create(
+            ProvidesListenerParameters providesListenerParameters,
+            ProvidesTestOutcomes providesTestOutcomes
+    ) {
         return new ExporterConfiguration(
-                LaunchEventsFactory.PARAMETERS_BASED_IMPLEMENTATION,
+                providesListenerParameters,
+                providesTestOutcomes,
+                LaunchEventsFactory.DEFAULT_IMPLEMENTATION,
                 SuiteEventsFactory.DEFAULT_IMPLEMENTATION
         );
     }
@@ -37,5 +51,13 @@ public class ExporterConfiguration {
 
     public SuiteEventsFactory suiteEventsFactory() {
         return suiteEventsFactory;
+    }
+
+    public ProvidesListenerParameters parametersProvider() {
+        return providesListenerParameters;
+    }
+
+    public ProvidesTestOutcomes testOutcomesProvider() {
+        return providesTestOutcomes;
     }
 }

@@ -5,6 +5,7 @@ import com.epam.reportportal.service.Launch;
 import com.epam.reportportal.service.ReportPortal;
 import com.epam.ta.reportportal.ws.model.FinishExecutionRQ;
 import com.epam.ta.reportportal.ws.model.launch.StartLaunchRQ;
+import com.github.carrotbyte.configuration.ExporterConfiguration;
 import com.github.carrotbyte.factories.LaunchEventsFactory;
 
 import java.time.Instant;
@@ -23,29 +24,25 @@ public class ReportExporter {
         return new ReportExporter(configuration);
     }
 
-    public void process() {
+    public void export() {
         // At this point we need to have all test outcomes metadata, or load them all into memory
-        Launch launch = createLaunch(configuration);
-        //
+        // configuration.testOutcomesProvider().getTestOutcomes()
+        ListenerParameters parameters = configuration.parametersProvider().getParameters();
+        Launch launch = createLaunch(parameters, configuration.launchEventsFactory());
+        // Delegate suites exports
         new SuiteExporter(Collections.emptyList(), launch, configuration).export();
-        finishLaunch(launch, configuration);
+        finishLaunch(launch, configuration.launchEventsFactory());
     }
 
-    private Launch createLaunch(ExporterConfiguration configuration) {
-        ListenerParameters parameters = new ListenerParameters();
-        // TODO: Those values should come from configuration
-        parameters.setBaseUrl("http://localhost:8080");
-        parameters.setApiKey("key");
-        parameters.setProjectName("project");
-        ReportPortal reportPortal = ReportPortal.builder().withParameters(parameters).build();
-        LaunchEventsFactory factory = configuration.launchEventsFactory();
+    private Launch createLaunch(ListenerParameters listenerParameters, LaunchEventsFactory factory) {
+        ReportPortal reportPortal = ReportPortal.builder().withParameters(listenerParameters).build();
         // TODO: Use real start date
         StartLaunchRQ event = factory.buildStartLaunch(Date.from(Instant.now()));
         return reportPortal.newLaunch(event);
     }
 
-    private void finishLaunch(Launch launch, ExporterConfiguration configuration) {
-        LaunchEventsFactory factory = configuration.launchEventsFactory();
+    private void finishLaunch(Launch launch, LaunchEventsFactory factory) {
+        // TODO: Use real end date here
         FinishExecutionRQ event = factory.buildFinishLaunch(Date.from(Instant.now()));
         launch.finish(event);
     }
