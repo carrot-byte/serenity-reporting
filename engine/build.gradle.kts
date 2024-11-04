@@ -25,6 +25,10 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
-tasks.test {
+tasks.named<Test>("test") {
     useJUnitPlatform()
+    maxHeapSize = "1G"
+    testLogging {
+        events("passed")
+    }
 }
