@@ -1,0 +1,118 @@
+{
+  "name": "No Params - Fail",
+  "id": "calculator2;no-params---fail",
+  "scenarioId": "classpath:features/cucumber/maintain_my_todo_list/bdd_tests2:No Params - Fail",
+  "methodName": "No Params - Fail",
+  "testSteps": [
+    {
+      "number": 1,
+      "description": "Given I have a calculator",
+      "duration": 0,
+      "startTime": "2024-11-04T15:50:57.045496-06:00[America/Chicago]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 2,
+      "description": "When I add 3 and 5",
+      "duration": 0,
+      "startTime": "2024-11-04T15:50:57.046368-06:00[America/Chicago]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 3,
+      "description": "Then the result should be 1",
+      "duration": 3014,
+      "startTime": "2024-11-04T15:50:57.047134-06:00[America/Chicago]",
+      "exception": {
+        "errorType": "java.lang.AssertionError",
+        "message": "\nExpected: \u003c1\u003e\n     but: was \u003c8\u003e",
+        "stackTrace": [
+          {
+            "declaringClass": "net.serenitybdd.demos.todos.cucumber.steps.MyStepdefs",
+            "methodName": "validateResult",
+            "fileName": "MyStepdefs.java",
+            "lineNumber": 49
+          },
+          {
+            "declaringClass": "✽",
+            "methodName": "the result should be 1",
+            "fileName": "classpath:features/cucumber/maintain_my_todo_list/bdd_tests2.feature",
+            "lineNumber": 35
+          }
+        ]
+      },
+      "result": "FAILURE",
+      "precondition": false,
+      "level": 0
+    }
+  ],
+  "userStory": {
+    "id": "classpath:features/cucumber/maintain_my_todo_list/bdd_tests2",
+    "storyName": "Calculator2",
+    "displayName": "Calculator2",
+    "path": "cucumber/maintain_my_todo_list/bdd_tests2",
+    "pathElements": [
+      {
+        "name": "cucumber",
+        "description": ""
+      },
+      {
+        "name": "maintain_my_todo_list",
+        "description": ""
+      },
+      {
+        "name": "bdd_tests2",
+        "description": ""
+      }
+    ],
+    "narrative": "  As a user\n  I want to use a calculator to add numbers\n  So that I don\u0027t need to add myself",
+    "type": "feature"
+  },
+  "title": "No Params - Fail",
+  "description": "",
+  "tags": [
+    {
+      "name": "Assertion error",
+      "type": "error",
+      "displayName": "Assertion error"
+    },
+    {
+      "name": "myTag",
+      "type": "tag",
+      "displayName": "myTag"
+    }
+  ],
+  "startTime": "2024-11-04T15:50:57.037468-06:00[America/Chicago]",
+  "duration": 0,
+  "testFailureCause": {
+    "errorType": "java.lang.AssertionError",
+    "message": "\nExpected: \u003c1\u003e\n     but: was \u003c8\u003e",
+    "stackTrace": [
+      {
+        "declaringClass": "net.serenitybdd.demos.todos.cucumber.steps.MyStepdefs",
+        "methodName": "validateResult",
+        "fileName": "MyStepdefs.java",
+        "lineNumber": 49
+      },
+      {
+        "declaringClass": "✽",
+        "methodName": "the result should be 1",
+        "fileName": "classpath:features/cucumber/maintain_my_todo_list/bdd_tests2.feature",
+        "lineNumber": 35
+      }
+    ]
+  },
+  "testFailureClassname": "java.lang.AssertionError",
+  "testFailureMessage": "\nExpected: \u003c1\u003e\n     but: was \u003c8\u003e",
+  "testFailureSummary": "FAILURE;java.lang.AssertionError;\nExpected: \u003c1\u003e\n     but: was \u003c8\u003e;MyStepdefs.java",
+  "projectKey": "",
+  "annotatedResult": "FAILURE",
+  "isManualTestingUpToDate": false,
+  "manual": false,
+  "testSource": "Cucumber",
+  "result": "FAILURE"
+}
