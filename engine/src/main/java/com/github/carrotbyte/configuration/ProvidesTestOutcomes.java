@@ -1,7 +1,9 @@
 package com.github.carrotbyte.configuration;
 
-import net.thucydides.model.reports.TestOutcomeStream;
+import net.thucydides.model.domain.TestOutcome;
+
+import java.util.stream.Stream;
 
 public interface ProvidesTestOutcomes {
-    TestOutcomeStream getTestOutcomes();
+    Stream<TestOutcome> getTestOutcomes();
 }

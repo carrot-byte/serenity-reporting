@@ -4,7 +4,6 @@ import net.thucydides.model.domain.DataTableRow;
 import net.thucydides.model.domain.TestOutcome;
 import net.thucydides.model.domain.TestResult;
 import net.thucydides.model.domain.TestTag;
-import net.thucydides.model.reports.TestOutcomeStream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PathBasedTestOutcomesProviderTest {
 
@@ -110,8 +111,8 @@ public class PathBasedTestOutcomesProviderTest {
     }
 
     private TestOutcome getMatchingOutcome(String desiredName) {
-        TestOutcomeStream testOutcomes = pathBasedTestOutcomesProvider.getTestOutcomes();
-        for (TestOutcome outcome : testOutcomes) {
+        Stream<TestOutcome> testOutcomes = pathBasedTestOutcomesProvider.getTestOutcomes();
+        for (TestOutcome outcome : testOutcomes.collect(Collectors.toList())) {
             if (outcome.getName().equals(desiredName)) {
                 System.out.println(outcome.getName());
                 return outcome;
