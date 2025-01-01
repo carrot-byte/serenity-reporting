@@ -1,0 +1,73 @@
+{
+  "name": "No Params - Pass 2",
+  "id": "calculator;no-params---pass-2",
+  "scenarioId": "classpath:features/cucumber/maintain_my_todo_list/bdd_tests:No Params - Pass 2",
+  "methodName": "No Params - Pass 2",
+  "testSteps": [
+    {
+      "number": 1,
+      "description": "Given I have a calculator",
+      "duration": 1,
+      "startTime": "2024-11-04T15:50:56.523741-06:00[America/Chicago]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 2,
+      "description": "When I add 2 and 2",
+      "duration": 4,
+      "startTime": "2024-11-04T15:50:56.526534-06:00[America/Chicago]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 3,
+      "description": "Then the result should be 4",
+      "duration": 1,
+      "startTime": "2024-11-04T15:50:56.531446-06:00[America/Chicago]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    }
+  ],
+  "userStory": {
+    "id": "classpath:features/cucumber/maintain_my_todo_list/bdd_tests",
+    "storyName": "Calculator",
+    "displayName": "Calculator",
+    "path": "cucumber/maintain_my_todo_list/bdd_tests",
+    "pathElements": [
+      {
+        "name": "cucumber",
+        "description": ""
+      },
+      {
+        "name": "maintain_my_todo_list",
+        "description": ""
+      },
+      {
+        "name": "bdd_tests",
+        "description": ""
+      }
+    ],
+    "narrative": "  As a user\n  I want to use a calculator to add numbers\n  So that I don\u0027t need to add myself",
+    "type": "feature"
+  },
+  "title": "No Params - Pass 2",
+  "description": "",
+  "tags": [
+    {
+      "name": "myTag",
+      "type": "tag",
+      "displayName": "myTag"
+    }
+  ],
+  "startTime": "2024-11-04T15:50:56.514505-06:00[America/Chicago]",
+  "duration": 20,
+  "projectKey": "",
+  "isManualTestingUpToDate": false,
+  "manual": false,
+  "testSource": "Cucumber",
+  "result": "SUCCESS"
+}
