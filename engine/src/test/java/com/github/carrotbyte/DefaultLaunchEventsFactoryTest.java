@@ -1,5 +1,6 @@
 package com.github.carrotbyte;
 
+import com.epam.ta.reportportal.ws.model.FinishExecutionRQ;
 import com.epam.ta.reportportal.ws.model.launch.StartLaunchRQ;
 import com.github.carrotbyte.factories.DefaultLaunchEventsFactory;
 import org.junit.jupiter.api.Assertions;
@@ -18,7 +19,15 @@ public class DefaultLaunchEventsFactoryTest {
 
     @Test
     public void testBuildStartLaunch() {
-        StartLaunchRQ newLaunch = defaultLaunchEventsFactory.buildStartLaunch(new Date());
-        Assertions.assertNotNull(newLaunch);
+        Date currentDate = new Date();
+        StartLaunchRQ launch = defaultLaunchEventsFactory.buildStartLaunch(currentDate);
+        Assertions.assertEquals(launch.getStartTime(), currentDate);
+    }
+
+    @Test
+    public void testBuildFinishLaunch() {
+        Date currentDate = new Date();
+        FinishExecutionRQ launch = defaultLaunchEventsFactory.buildFinishLaunch(currentDate);
+        Assertions.assertEquals(launch.getEndTime(), currentDate);
     }
 }

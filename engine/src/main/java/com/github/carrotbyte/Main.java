@@ -23,8 +23,9 @@ public class Main {
 
     private static ListenerParameters createListenerParameters() {
         // Caller side must define a way of listener parameters creation
-        // E. g. plugin will fill it from its own configuration
+        // E.g. plugin will fill it from its own configuration
         ListenerParameters parameters = new ListenerParameters();
+        parameters.setEnable(true);
         parameters.setBaseUrl("http://localhost:8080");
         parameters.setApiKey("api-key");
         parameters.setProjectName("project-name");
