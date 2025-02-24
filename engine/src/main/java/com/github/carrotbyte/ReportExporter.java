@@ -9,12 +9,9 @@ import com.github.carrotbyte.configuration.ExporterConfiguration;
 import com.github.carrotbyte.factories.LaunchEventsFactory;
 import net.thucydides.model.domain.TestOutcome;
 
-import java.time.Instant;
-import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 public class ReportExporter {
@@ -41,7 +38,11 @@ public class ReportExporter {
 
     private Launch createLaunch(ListenerParameters listenerParameters, LaunchEventsFactory factory) {
         ReportPortal reportPortal = ReportPortal.builder().withParameters(listenerParameters).build();
-        Date startDate = getDesiredTime("start");
+        Stream<TestOutcome> testOutcomesStream = configuration.testOutcomesProvider().getTestOutcomes();
+        Date startDate = testOutcomesStream.map(TestOutcome::getStartTime)
+                .min(Comparator.naturalOrder())
+                .map(date -> Date.from(date.toInstant()))
+                .orElseThrow(() -> new IllegalArgumentException("There are no test outcomes."));
         StartLaunchRQ startLaunchRQ = factory.buildStartLaunch(startDate);
         //TODO: where do we take name?
         startLaunchRQ.setName("Test");
@@ -49,32 +50,13 @@ public class ReportExporter {
     }
 
     private void finishLaunch(Launch launch, LaunchEventsFactory factory) {
-        Date finishDate = getDesiredTime("finish");
+        Stream<TestOutcome> testOutcomesStream = configuration.testOutcomesProvider().getTestOutcomes();
+        Date finishDate = testOutcomesStream.map(
+                        testOutcome -> testOutcome.getStartTime().toInstant()
+                                .plusMillis(testOutcome.getDuration()))
+                .max(Comparator.naturalOrder())
+                .map(Date::from).orElseThrow(() -> new IllegalArgumentException("There are no test outcomes."));
         FinishExecutionRQ event = factory.buildFinishLaunch(finishDate);
         launch.finish(event);
-    }
-
-    private Date getDesiredTime(String startOrEnd) {
-        Stream<TestOutcome> testOutcomesStream = configuration.testOutcomesProvider().getTestOutcomes();
-        Instant date;
-        switch (startOrEnd) {
-            case "start":
-                Optional<ZonedDateTime> desiredDate = testOutcomesStream.map(TestOutcome::getStartTime)
-                        .min(Comparator.naturalOrder());
-                if (desiredDate.isEmpty()) {
-                    throw new IllegalArgumentException("There are no test outcomes.");
-                }
-                date = desiredDate.get().toInstant();
-                break;
-            case "finish":
-                date = testOutcomesStream.map(
-                                testOutcome -> testOutcome.getStartTime().toInstant()
-                                        .plusMillis(testOutcome.getDuration()))
-                        .max(Comparator.naturalOrder()).get();
-                break;
-            default:
-                throw new IllegalArgumentException("Only 'start' and 'end' are acceptable options");
-        }
-        return Date.from(date);
     }
 }
