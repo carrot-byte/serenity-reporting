@@ -9,11 +9,15 @@ public class DefaultLaunchEventsFactory implements LaunchEventsFactory {
 
     @Override
     public StartLaunchRQ buildStartLaunch(Date startTime) {
-        return new StartLaunchRQ();
+        StartLaunchRQ startLaunchRQ = new StartLaunchRQ();
+        startLaunchRQ.setStartTime(startTime);
+        return startLaunchRQ;
     }
 
     @Override
     public FinishExecutionRQ buildFinishLaunch(Date endTime) {
-        return new FinishExecutionRQ();
+        FinishExecutionRQ finishExecutionRQ = new FinishExecutionRQ();
+        finishExecutionRQ.setEndTime(endTime);
+        return finishExecutionRQ;
     }
 }

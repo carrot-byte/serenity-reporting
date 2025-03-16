@@ -16,7 +16,7 @@
     {
       "number": 2,
       "description": "When I add 3 and 5",
-      "duration": 0,
+      "duration": 1000,
       "startTime": "2024-11-04T15:50:57.046368-06:00[America/Chicago]",
       "result": "SUCCESS",
       "precondition": false,
